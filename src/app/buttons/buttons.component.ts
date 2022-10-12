@@ -1,56 +1,24 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { generateColor } from "../functions/color-generator.function";
-import { shuffle } from "../functions/shuffle.function";
+import { Component, OnInit } from "@angular/core";
+import { Subject } from "rxjs";
+import { GameService } from "../services/game.service";
 
 @Component({
   selector: "app-buttons",
   templateUrl: "./buttons.component.html",
   styleUrls: ["./buttons.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonsComponent implements OnInit {
 
-    @Input() public correctColor = "";
+    public answers?: Subject<string[]>;
 
-    @Output() public correctAnswer = new EventEmitter<boolean>();
-
-    public colorSet: string[] = [];
-
-    constructor(private cdr: ChangeDetectorRef){}
+    constructor(private gameService: GameService){}
 
     public ngOnInit(): void {
-        console.log(this.colorSet);
-        
-        this.setColors();
-        this.cdr.detectChanges();
+        this.answers = this.gameService.answers;
     }
 
-    public setColors(): void {
-        this.colorSet = [];
-        console.log(this.correctColor);
-        for (let index = 0; index < 2; index++) {
-            this.colorSet.push(generateColor());
-        }
-        this.colorSet.push(this.correctColor);
-        this.colorSet = shuffle(this.colorSet);
-        this.cdr.detectChanges();
+    public changeColors(answer: string): void {
+        console.log("click")
+        this.gameService.setAnswers(answer);
     }
-
-    public checkAnswer(color: string): void {
-
-        setTimeout(() => {
-            if (color === this.correctColor) {
-                console.log("match");
-                this.correctAnswer.emit(true);  
-                this.setColors();
-            } else{
-                console.log("miss");
-                this.correctAnswer.emit(false);
-            }
-        }, 70);
-        
-        // this.correctColor = "";
-        this.cdr.detectChanges();
-    }
-
 }

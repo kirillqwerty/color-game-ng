@@ -1,8 +1,7 @@
-<div class="scores">
+<div class="scores" *ngIf="streak | async as streak">
     Your streak: {{streak}}
 </div>
 
 <div class="color-screen-wrapper">
-    <div class="color-square" [style.background]="currentColor">
-    </div>
+    <div class="color-square" *ngIf="currentColor | async as currentColor" [style.background]="currentColor">{{currentColor}}</div>
 </div>

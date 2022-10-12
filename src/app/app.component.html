@@ -1,3 +1,3 @@
-<app-screen [currentColor]="currentColor" [streak]="streak"></app-screen>
-<app-buttons [correctColor]="currentColor" (correctAnswer)="nextColor($event)"></app-buttons>
-<div class="step-message">{{message}}</div>
+<app-screen></app-screen>
+<app-buttons></app-buttons>
+<div class="step-message" *ngIf="message | async as message" >{{message}}</div>

@@ -1,6 +1,11 @@
 <div class="label-wrapper">
     <p>What color is this?</p>
 </div>
-<div class="button-wrapper">
-    <button *ngFor="let color of colorSet" (click)="checkAnswer(color)">{{color}}</button>
+
+<div class="button-wrapper" *ngIf="answers | async as answers">
+    <!-- <button (click)="changeColors()"></button>
+    <button (click)="changeColors()"></button>
+    <button (click)="changeColors()"></button> -->
+    <button *ngFor="let answer of answers" (click)="changeColors(answer)">{{answer}}</button>
 </div>
+
