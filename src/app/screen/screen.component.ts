@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Subject } from "rxjs";
+import { Observable } from "rxjs";
 import { GameService } from "../services/game.service";
 
 @Component({
@@ -9,14 +9,14 @@ import { GameService } from "../services/game.service";
 })
 export class ScreenComponent implements OnInit {
 
-    public currentColor?: Subject<string>;
+    public currentColor$?: Observable<string>;
 
-    public streak?: Subject<number>;
+    public streak$?: Observable<number>;
 
     constructor(private gameService: GameService){}
 
     public ngOnInit(): void {
-        this.currentColor = this.gameService.currentColor;
-        this.streak = this.gameService.streakStream;
+        this.currentColor$ = this.gameService.currentColor;
+        this.streak$ = this.gameService.streakStream;
     }
 }

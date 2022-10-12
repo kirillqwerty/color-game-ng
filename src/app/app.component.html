@@ -1,3 +1,4 @@
 <app-screen></app-screen>
 <app-buttons></app-buttons>
-<div class="step-message" *ngIf="message | async as message" >{{message}}</div>
+<div class="step-message" *ngIf="message$ | async as message; else defaultMessage">{{message}}</div>
+<ng-template #defaultMessage><a class="step-message">Move</a></ng-template>

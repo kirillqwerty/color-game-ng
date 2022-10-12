@@ -1,7 +1,7 @@
-<div class="scores" *ngIf="streak | async as streak">
-    Your streak: {{streak}}
+<div class="scores">
+    <p *ngIf="streak$ | async as streak; else defaultMessage">Your streak: {{streak}}</p>
+    <ng-template #defaultMessage>Your streak: 0</ng-template>
 </div>
-
 <div class="color-screen-wrapper">
-    <div class="color-square" *ngIf="currentColor | async as currentColor" [style.background]="currentColor"></div>
+    <div class="color-square" *ngIf="currentColor$ | async as currentColor" [style.background]="currentColor"></div>
 </div>

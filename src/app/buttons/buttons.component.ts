@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Subject } from "rxjs";
+import { Observable } from "rxjs";
 import { GameService } from "../services/game.service";
 
 @Component({
@@ -9,7 +9,7 @@ import { GameService } from "../services/game.service";
 })
 export class ButtonsComponent implements OnInit {
 
-    public answers?: Subject<string[]>;
+    public answers?: Observable<string[]>;
 
     constructor(private gameService: GameService){}
 

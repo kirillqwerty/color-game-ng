@@ -1,5 +1,5 @@
 import { Component, OnInit} from "@angular/core";
-import { Subject } from "rxjs";
+import { Observable } from "rxjs";
 import { GameService } from "./services/game.service";
 
 @Component({
@@ -9,12 +9,12 @@ import { GameService } from "./services/game.service";
 })
 export class AppComponent implements OnInit {
 
-    public message?: Subject<string>;
+    public message$?: Observable<string>;
 
     constructor(private gameService: GameService){}
 
     public ngOnInit(): void {
-        this.message = this.gameService.message;
+        this.message$ = this.gameService.message;
     }
 
 }
